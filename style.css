@@ -2070,25 +2070,29 @@ body.dark .contact-box {
 }
 
 /* =========================================================
-   DARK MODE — FEATURED SOLUTION CARD
+   DARK MODE — SOLUTION CARDS
 ========================================================= */
 
+body.dark .solution-card,
 body.dark .solution-card.featured {
-    background: #171b23;
-    color: #f5f7fa;
-    border-color: #2b313c;
+    background: var(--surface);
+    color: var(--text);
+    border-color: var(--border);
 }
 
+body.dark .solution-card h3,
 body.dark .solution-card.featured h3 {
-    color: #f5f7fa;
+    color: var(--text);
 }
 
+body.dark .solution-card p,
 body.dark .solution-card.featured p {
-    color: #a5abb5;
+    color: var(--text-secondary);
 }
 
+body.dark .solution-card .solution-link,
 body.dark .solution-card.featured .solution-link {
-    color: #f5f7fa;
+    color: var(--text);
 }
 
 /* =========================================================
