@@ -2410,3 +2410,18 @@ body.dark .solution-card.featured .solution-link {
     }
 
 }
+
+/* =========================================================
+   COMING SOON SOLUTION CARDS
+========================================================= */
+
+.coming-soon-link {
+    cursor: default !important;
+    opacity: 0.55;
+    pointer-events: none;
+}
+
+.coming-soon-link:hover {
+    transform: none !important;
+    color: var(--text-light) !important;
+}
