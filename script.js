@@ -216,14 +216,57 @@ const projects = {
 
 
         previewTitle:
-            "Expandable Navigation Cards",
+    "Expandable Navigation Cards",
 
-        previewText:
-            "Screenshots of the Expandable Navigation Cards solution will be added here.",
+previewText:
+    "A look at the navigation experience, card configuration and SharePoint authoring interface.",
 
+previewImage:
+    "ENC1.png",
 
-        sections: [
+screenshots: [
+    {
+        afterSection: "03",
+        image: "ENC1.png",
+        title: "Expandable Navigation Cards",
+        description:
+            "Main navigation experience showing business areas organized into expandable cards."
+    },
 
+    {
+        afterSection: "04",
+        image: "ENC2.png",
+        title: "Card Management",
+        description:
+            "Card management interface for creating, editing, duplicating and deleting navigation cards."
+    },
+
+    {
+        afterSection: "04",
+        image: "ENC4.png",
+        title: "Edit Card Configuration",
+        description:
+            "Card configuration interface for defining the card title, description and navigation links."
+    },
+
+    {
+        afterSection: "05",
+        image: "ENC3.png",
+        title: "Icon Selection & Styling",
+        description:
+            "Icon selection interface with predefined icons and customizable icon colors and backgrounds."
+    },
+
+    {
+        afterSection: "06",
+        image: "ENC5.png",
+        title: "Expanded Navigation Experience",
+        description:
+            "Final user experience showing expandable navigation cards and their related links."
+    }
+],
+
+sections: [
 
             /* ---------------------------------------------
                SECTION 01
@@ -820,13 +863,49 @@ const projects = {
 
 
         previewTitle:
-            "Expandable Menu",
+    "Expandable Menu",
 
-        previewText:
-            "Screenshots of the Expandable Menu solution will be added here.",
+previewText:
+    "A look at the SharePoint web part, menu configuration and authoring experience.",
 
+previewImage:
+    "EM1.png",
 
-        sections: [
+screenshots: [
+    {
+        afterSection: "03",
+        image: "EM1.png",
+        title: "Expandable Menu",
+        description:
+            "Expandable Menu displayed on a SharePoint page with grouped navigation links."
+    },
+
+    {
+        afterSection: "04",
+        image: "EM2.png",
+        title: "Menu Heading Settings",
+        description:
+            "Configuration experience showing the menu heading and available heading-size options."
+    },
+
+    {
+        afterSection: "07",
+        image: "EM3.png",
+        title: "Expandable Menu Configuration",
+        description:
+            "SharePoint property pane used to configure the menu heading, formatting and navigation links."
+    },
+
+    {
+        afterSection: "01",
+        image: "EM4.png",
+        title: "SharePoint Web Part",
+        description:
+            "Expandable Menu available as a reusable web part within the SharePoint page authoring experience."
+    }
+],
+
+sections: [
 
 
             /* ---------------------------------------------
