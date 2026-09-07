@@ -1663,9 +1663,16 @@ const modalPreviewText =
 const caseStudyContent =
     document.getElementById("caseStudyContent");
 
+const modalPreviewImage =
+    document.getElementById("modalPreviewImage");
+
 
 let lastFocusedElement = null;
 
+
+/* =========================================================
+   BUILD CASE STUDY CONTENT
+========================================================= */
 
 /* =========================================================
    BUILD CASE STUDY CONTENT
@@ -1675,36 +1682,33 @@ function renderCaseStudy(project) {
 
     if (!caseStudyContent) return;
 
-
     caseStudyContent.innerHTML = "";
-
 
     project.sections.forEach(section => {
 
+        /* ---------------------------------------------
+           CREATE CASE STUDY SECTION
+        ---------------------------------------------- */
 
         const sectionElement =
             document.createElement("section");
 
-
         sectionElement.className =
             "case-study-section";
 
-
         /*
             Alternate every second section.
-
-            This keeps the same visual style as your
-            original case-study design.
         */
 
         if (
             parseInt(section.number, 10) % 2 === 0
         ) {
 
-            sectionElement.classList.add("alternate");
+            sectionElement.classList.add(
+                "alternate"
+            );
 
         }
-
 
         sectionElement.innerHTML = `
 
@@ -1728,7 +1732,6 @@ function renderCaseStudy(project) {
 
             </div>
 
-
             <div class="case-study-section-body">
 
                 ${section.content}
@@ -1737,10 +1740,81 @@ function renderCaseStudy(project) {
 
         `;
 
-
         caseStudyContent.appendChild(
             sectionElement
         );
+
+
+        /* ---------------------------------------------
+           ADD SCREENSHOTS AFTER RELEVANT SECTION
+        ---------------------------------------------- */
+
+        if (project.screenshots) {
+
+            const screenshotsForSection =
+                project.screenshots.filter(
+                    screenshot =>
+                        screenshot.afterSection ===
+                        section.number
+                );
+
+            screenshotsForSection.forEach(
+                screenshot => {
+
+                    const screenshotSection =
+                        document.createElement(
+                            "section"
+                        );
+
+                    screenshotSection.className =
+                        "case-study-screenshot-section";
+
+                    screenshotSection.innerHTML = `
+
+                        <div class="case-study-screenshot-header">
+
+                            <p class="eyebrow">
+                                PROJECT SCREENSHOT
+                            </p>
+
+                            <h3>
+                                ${screenshot.title}
+                            </h3>
+
+                            <p>
+                                ${screenshot.description}
+                            </p>
+
+                        </div>
+
+                        <figure
+                            class="case-study-screenshot"
+                        >
+
+                            <div
+                                class="case-study-screenshot-frame"
+                            >
+
+                                <img
+                                    src="${screenshot.image}"
+                                    alt="${screenshot.title}"
+                                    loading="lazy"
+                                >
+
+                            </div>
+
+                        </figure>
+
+                    `;
+
+                    caseStudyContent.appendChild(
+                        screenshotSection
+                    );
+
+                }
+            );
+
+        }
 
     });
 
@@ -1818,18 +1892,29 @@ document
 
                 if (modalPreviewTitle) {
 
-                    modalPreviewTitle.textContent =
-                        project.previewTitle;
+    modalPreviewTitle.textContent =
+        project.previewTitle;
 
-                }
+}
 
 
-                if (modalPreviewText) {
+if (modalPreviewText) {
 
-                    modalPreviewText.textContent =
-                        project.previewText;
+    modalPreviewText.textContent =
+        project.previewText;
 
-                }
+}
+
+
+if (modalPreviewImage) {
+
+    modalPreviewImage.src =
+        project.previewImage;
+
+    modalPreviewImage.alt =
+        project.previewTitle;
+
+}
 
 
                 /*
