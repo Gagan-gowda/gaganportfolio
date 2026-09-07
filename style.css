@@ -2425,3 +2425,135 @@ body.dark .solution-card.featured .solution-link {
     transform: none !important;
     color: var(--text-light) !important;
 }
+
+
+/* =========================================================
+   CASE STUDY SCREENSHOTS
+========================================================= */
+
+.case-study-preview {
+    width: 100%;
+}
+
+.preview-image-container {
+    width: 100%;
+    overflow: hidden;
+    border-radius: 18px;
+    border: 1px solid var(--border);
+    background: var(--surface);
+}
+
+.preview-image-container img {
+    display: block;
+    width: 100%;
+    height: auto;
+    max-height: 620px;
+    object-fit: contain;
+}
+
+.preview-image-info {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    margin-top: 18px;
+}
+
+.preview-image-info h2 {
+    margin: 0 0 6px;
+}
+
+.preview-image-info p {
+    margin: 0;
+    color: var(--muted);
+    line-height: 1.6;
+}
+
+
+/* =========================================================
+   SCREENSHOT SECTION
+========================================================= */
+
+.case-study-screenshot-section {
+    padding: 70px 0;
+    border-top: 1px solid var(--border);
+}
+
+.case-study-screenshot-header {
+    max-width: 760px;
+    margin-bottom: 28px;
+}
+
+.case-study-screenshot-header h3 {
+    margin: 8px 0 10px;
+    font-size: clamp(24px, 3vw, 34px);
+    line-height: 1.2;
+}
+
+.case-study-screenshot-header > p:last-child {
+    margin: 0;
+    color: var(--muted);
+    line-height: 1.7;
+    max-width: 700px;
+}
+
+
+/* =========================================================
+   SCREENSHOT IMAGE
+========================================================= */
+
+.case-study-screenshot {
+    margin: 0;
+}
+
+.case-study-screenshot-frame {
+    width: 100%;
+    overflow: hidden;
+    border-radius: 16px;
+    border: 1px solid var(--border);
+    background: var(--surface);
+    box-shadow:
+        0 12px 35px rgba(0, 0, 0, 0.08);
+}
+
+.case-study-screenshot-frame img {
+    display: block;
+    width: 100%;
+    height: auto;
+    max-height: 760px;
+    object-fit: contain;
+}
+
+
+/* =========================================================
+   DARK MODE
+========================================================= */
+
+body.dark .case-study-screenshot-frame {
+    box-shadow:
+        0 12px 35px rgba(0, 0, 0, 0.25);
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 768px) {
+
+    .case-study-screenshot-section {
+        padding: 45px 0;
+    }
+
+    .case-study-screenshot-frame {
+        border-radius: 12px;
+    }
+
+    .preview-image-container {
+        border-radius: 12px;
+    }
+
+    .preview-image-info {
+        gap: 12px;
+    }
+
+}
