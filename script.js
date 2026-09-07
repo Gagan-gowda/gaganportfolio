@@ -26,20 +26,28 @@ window.addEventListener("scroll", () => {
 const menuToggle = document.getElementById("menuToggle");
 const navMenu = document.getElementById("navMenu");
 
-menuToggle.addEventListener("click", () => {
+if (menuToggle && navMenu) {
 
-    navMenu.classList.toggle("active");
+    menuToggle.addEventListener("click", () => {
 
-});
+        navMenu.classList.toggle("active");
+
+    });
+
+}
 
 
-/* Close mobile menu after clicking a link */
+/* Close mobile menu after clicking a navigation link */
 
 document.querySelectorAll(".nav-link").forEach(link => {
 
     link.addEventListener("click", () => {
 
-        navMenu.classList.remove("active");
+        if (navMenu) {
+
+            navMenu.classList.remove("active");
+
+        }
 
     });
 
@@ -67,8 +75,7 @@ window.addEventListener("scroll", () => {
 
         if (
             window.scrollY >= sectionTop &&
-            window.scrollY <
-            sectionTop + sectionHeight
+            window.scrollY < sectionTop + sectionHeight
         ) {
 
             currentSection =
@@ -104,74 +111,117 @@ window.addEventListener("scroll", () => {
 const themeToggle =
     document.getElementById("themeToggle");
 
-
 const savedTheme =
     localStorage.getItem("portfolio-theme");
 
+
+/* Restore previously selected theme */
 
 if (savedTheme === "dark") {
 
     document.body.classList.add("dark");
 
-    themeToggle.textContent = "☀";
+    if (themeToggle) {
+
+        themeToggle.textContent = "☀";
+
+    }
+
+} else {
+
+    if (themeToggle) {
+
+        themeToggle.textContent = "☾";
+
+    }
 
 }
 
 
-themeToggle.addEventListener("click", () => {
+/* Toggle theme */
 
-    document.body.classList.toggle("dark");
+if (themeToggle) {
+
+    themeToggle.addEventListener("click", () => {
+
+        document.body.classList.toggle("dark");
 
 
-    const isDark =
-        document.body.classList.contains("dark");
+        const isDark =
+            document.body.classList.contains("dark");
 
 
-    if (isDark) {
+        if (isDark) {
 
-        themeToggle.textContent = "☀";
+            themeToggle.textContent = "☀";
 
-        localStorage.setItem(
-            "portfolio-theme",
-            "dark"
-        );
+            localStorage.setItem(
+                "portfolio-theme",
+                "dark"
+            );
 
-    } else {
+        } else {
 
-        themeToggle.textContent = "☾";
+            themeToggle.textContent = "☾";
 
-        localStorage.setItem(
-            "portfolio-theme",
-            "light"
-        );
+            localStorage.setItem(
+                "portfolio-theme",
+                "light"
+            );
 
-    }
+        }
 
-});
+    });
+
+}
 
 
 /* =========================================================
-   PROJECT CASE STUDY
+   PROJECT CASE STUDY MODAL
 ========================================================= */
 
-const projectModal = document.getElementById("projectModal");
-const modalClose = document.getElementById("modalClose");
-const modalFooterClose = document.getElementById("modalFooterClose");
-const modalOverlay = document.getElementById("modalOverlay");
-const modalContainer = projectModal.querySelector(".case-study-container");
-const modalTitle = document.getElementById("modalTitle");
-const modalType = document.getElementById("modalType");
-const modalDescription = document.getElementById("modalDescription");
-const modalTech = document.getElementById("modalTech");
-let lastFocusedElement;
+const projectModal =
+    document.getElementById("projectModal");
+
+const modalClose =
+    document.getElementById("modalClose");
+
+const modalFooterClose =
+    document.getElementById("modalFooterClose");
+
+const modalOverlay =
+    document.getElementById("modalOverlay");
+
+const modalContainer =
+    projectModal
+        ? projectModal.querySelector(".case-study-container")
+        : null;
+
+const modalTitle =
+    document.getElementById("modalTitle");
+
+const modalType =
+    document.getElementById("modalType");
+
+const modalDescription =
+    document.getElementById("modalDescription");
+
+const modalTech =
+    document.getElementById("modalTech");
 
 
-/*
-    Temporary solution information.
+let lastFocusedElement = null;
 
-    Later, we'll replace these with your
-    actual projects and case studies.
-*/
+
+/* =========================================================
+   ACTIVE PROJECTS
+=========================================================
+
+   Only these two projects have case studies.
+
+   Projects 03–06 are intentionally NOT included here
+   because they are "Coming soon".
+========================================================= */
 
 const projects = {
 
@@ -182,7 +232,7 @@ const projects = {
         type: "SHAREPOINT • SPFx",
 
         description:
-            "A custom SharePoint Framework solution designed to improve page navigation by organizing related links into expandable navigation cards. The solution focuses on creating a cleaner page experience while allowing users to access related content without displaying every link at once.",
+            "A custom SharePoint Framework solution designed to improve page navigation by organizing related links into expandable navigation cards. The solution provides a cleaner page experience while allowing users to access related content without displaying every link at once.",
 
         technologies: [
             "SharePoint Online",
@@ -201,7 +251,7 @@ const projects = {
         type: "SHAREPOINT • SPFx",
 
         description:
-            "A configurable SharePoint web part that provides expandable and collapsible menu navigation. It allows related links to be grouped together while keeping the SharePoint page clean and easy to navigate.",
+            "A configurable SharePoint Framework web part that provides expandable and collapsible menu navigation. It allows related links to be grouped under a single heading while keeping the SharePoint page clean, organized and easy to navigate.",
 
         technologies: [
             "SharePoint Online",
@@ -210,164 +260,233 @@ const projects = {
             "TypeScript"
         ]
 
-    },
-
-
-    "power-apps": {
-
-        title: "Business Applications",
-
-        type: "POWER APPS",
-
-        description:
-            "Canvas and Model-Driven Power Apps designed around business requirements and integrated with Microsoft 365 and SharePoint.",
-
-        technologies: [
-            "Power Apps",
-            "SharePoint",
-            "Microsoft 365"
-        ]
-
-    },
-
-
-    "automation": {
-
-        title: "Workflow Automation",
-
-        type: "POWER AUTOMATE",
-
-        description:
-            "Automated workflows for approvals, notifications and operational processes, helping teams reduce repetitive manual work.",
-
-        technologies: [
-            "Power Automate",
-            "Cloud Flows",
-            "Approvals"
-        ]
-
-    },
-
-
-    "power-bi": {
-
-        title: "Data & Reporting",
-
-        type: "POWER BI",
-
-        description:
-            "Interactive dashboards and reports designed to provide stakeholders with actionable operational and compliance insights.",
-
-        technologies: [
-            "Power BI",
-            "Data Analytics",
-            "Microsoft 365"
-        ]
-
-    },
-
-
-    "powershell": {
-
-        title: "PowerShell Automation",
-
-        type: "AUTOMATION",
-
-        description:
-            "PowerShell scripts developed to automate SharePoint administration tasks including provisioning, site creation and permission audits.",
-
-        technologies: [
-            "PowerShell",
-            "SharePoint",
-            "Automation"
-        ]
-
     }
 
 };
 
-/* Open modal */
 
-document.querySelectorAll(".solution-link").forEach(button => {
+/* =========================================================
+   OPEN PROJECT MODAL
+=========================================================
 
-    button.addEventListener("click", () => {
+   IMPORTANT:
+   Only elements with:
+       class="solution-link"
+   AND
+       data-project="..."
 
-        const projectId =
-            button.getAttribute("data-project");
+   will open the modal.
 
-        const project =
-            projects[projectId];
+   Therefore "Coming soon" projects will not open anything.
+========================================================= */
 
-        if (!project) return;
+document
+    .querySelectorAll(".solution-link[data-project]")
+    .forEach(button => {
 
+        button.addEventListener("click", () => {
 
-        modalTitle.textContent =
-            project.title;
-
-        modalType.textContent =
-            project.type;
-
-        modalDescription.textContent =
-            project.description;
-
-
-        modalTech.innerHTML = "";
+            const projectId =
+                button.getAttribute("data-project");
 
 
-        project.technologies.forEach(technology => {
+            const project =
+                projects[projectId];
 
-            const tag =
-                document.createElement("span");
 
-            tag.textContent =
-                technology;
+            /* Safety check */
 
-            modalTech.appendChild(tag);
+            if (!project) {
+
+                return;
+
+            }
+
+
+            /* Update modal title */
+
+            if (modalTitle) {
+
+                modalTitle.textContent =
+                    project.title;
+
+            }
+
+
+            /* Update project type */
+
+            if (modalType) {
+
+                modalType.textContent =
+                    project.type;
+
+            }
+
+
+            /* Update project description */
+
+            if (modalDescription) {
+
+                modalDescription.textContent =
+                    project.description;
+
+            }
+
+
+            /* Clear existing technology tags */
+
+            if (modalTech) {
+
+                modalTech.innerHTML = "";
+
+
+                /* Add technology tags */
+
+                project.technologies.forEach(
+                    technology => {
+
+                        const tag =
+                            document.createElement("span");
+
+                        tag.textContent =
+                            technology;
+
+                        modalTech.appendChild(tag);
+
+                    }
+                );
+
+            }
+
+
+            /* Remember the element that opened the modal */
+
+            lastFocusedElement =
+                document.activeElement;
+
+
+            /* Open modal */
+
+            if (projectModal) {
+
+                projectModal.classList.add("active");
+
+                projectModal.setAttribute(
+                    "aria-hidden",
+                    "false"
+                );
+
+                document.body.style.overflow =
+                    "hidden";
+
+            }
+
+
+            /* Move keyboard focus into modal */
+
+            if (modalContainer) {
+
+                modalContainer.focus();
+
+            }
 
         });
 
-
-        lastFocusedElement = document.activeElement;
-        projectModal.classList.add("active");
-        projectModal.setAttribute("aria-hidden", "false");
-        document.body.style.overflow = "hidden";
-        modalContainer.focus();
-
     });
 
-});
 
-
-/* Close modal */
+/* =========================================================
+   CLOSE MODAL
+========================================================= */
 
 function closeModal() {
+
+    if (!projectModal) {
+
+        return;
+
+    }
+
+
     projectModal.classList.remove("active");
-    projectModal.setAttribute("aria-hidden", "true");
+
+    projectModal.setAttribute(
+        "aria-hidden",
+        "true"
+    );
+
+
     document.body.style.overflow = "";
-    lastFocusedElement?.focus();
+
+
+    /* Return focus to the original button */
+
+    if (
+        lastFocusedElement &&
+        typeof lastFocusedElement.focus === "function"
+    ) {
+
+        lastFocusedElement.focus();
+
+    }
+
+
+    lastFocusedElement = null;
+
 }
 
 
-modalClose.addEventListener(
-    "click",
-    closeModal
-);
+/* =========================================================
+   MODAL CLOSE BUTTON
+========================================================= */
 
-modalFooterClose.addEventListener("click", closeModal);
+if (modalClose) {
+
+    modalClose.addEventListener(
+        "click",
+        closeModal
+    );
+
+}
 
 
-modalOverlay.addEventListener(
-    "click",
-    closeModal
-);
+/* =========================================================
+   MODAL FOOTER CLOSE BUTTON
+========================================================= */
+
+if (modalFooterClose) {
+
+    modalFooterClose.addEventListener(
+        "click",
+        closeModal
+    );
+
+}
 
 
-/* Escape key */
+/* =========================================================
+   MODAL OVERLAY CLOSE
+========================================================= */
+
+if (modalOverlay) {
+
+    modalOverlay.addEventListener(
+        "click",
+        closeModal
+    );
+
+}
+
+
+/* =========================================================
+   ESCAPE KEY
+========================================================= */
 
 document.addEventListener("keydown", event => {
 
     if (
         event.key === "Escape" &&
+        projectModal &&
         projectModal.classList.contains("active")
     ) {
 
@@ -382,7 +501,12 @@ document.addEventListener("keydown", event => {
    CURRENT YEAR
 ========================================================= */
 
-document.getElementById(
-    "currentYear"
-).textContent =
-    new Date().getFullYear();
+const currentYear =
+    document.getElementById("currentYear");
+
+if (currentYear) {
+
+    currentYear.textContent =
+        new Date().getFullYear();
+
+}
