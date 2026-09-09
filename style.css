@@ -2841,17 +2841,17 @@ body.dark .gallery-arrow {
 .profile-card {
     display: inline-flex;
     align-items: center;
-    gap: 14px;
+    gap: 18px;
 
     width: fit-content;
 
-    padding: 8px 16px 8px 8px;
+    padding: 12px 20px 12px 12px;
 
     margin-bottom: 28px;
 
     border: 1px solid var(--border);
 
-    border-radius: 18px;
+    border-radius: 20px;
 
     background: var(--surface);
 
@@ -2877,14 +2877,14 @@ body.dark .gallery-arrow {
 ========================================================= */
 
 .profile-photo-wrapper {
-    width: 76px;
-    height: 76px;
+    width: 110px;
+    height: 110px;
 
     flex-shrink: 0;
 
     overflow: hidden;
 
-    border-radius: 14px;
+    border-radius: 16px;
 
     border: 1px solid var(--border);
 
@@ -2900,6 +2900,8 @@ body.dark .gallery-arrow {
 
     object-fit: cover;
     object-position: center;
+
+   image-rendering: auto;
 }
 
 
@@ -2916,7 +2918,8 @@ body.dark .gallery-arrow {
 
 
 .profile-card-info strong {
-    font-size: 15px;
+    font-size: 18px;
+    font-weight: 700;
 
     line-height: 1.3;
 
@@ -2925,7 +2928,7 @@ body.dark .gallery-arrow {
 
 
 .profile-card-info span {
-    font-size: 12px;
+    font-size: 14px;
 
     line-height: 1.4;
 
@@ -2958,8 +2961,8 @@ body.dark .profile-card {
     }
 
     .profile-photo-wrapper {
-        width: 64px;
-        height: 64px;
+        width: 120px;
+        height: 120px;
     }
 
     .profile-card-info strong {
