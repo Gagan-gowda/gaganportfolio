@@ -1484,30 +1484,67 @@
 
                 <div class="case-study-preview">
 
-                    <div class="preview-placeholder">
+    <div class="project-gallery">
 
-                        <span class="preview-placeholder-icon">
-                            ◫
-                        </span>
+        <!-- Main image -->
+        <div class="gallery-main">
 
-                        <h2>
-                            Project screenshots
-                        </h2>
+            <button
+                type="button"
+                class="gallery-arrow gallery-prev"
+                id="galleryPrev"
+                aria-label="Previous screenshot">
+                ←
+            </button>
 
-                        <p>
-                            Screenshots of the SharePoint solution
-                            will be added here.
-                        </p>
+            <div class="gallery-main-image">
+                <img
+                    id="galleryMainImage"
+                    src=""
+                    alt=""
+                >
+            </div>
 
-                        <span class="coming-soon">
-                            COMING SOON
-                        </span>
+            <button
+                type="button"
+                class="gallery-arrow gallery-next"
+                id="galleryNext"
+                aria-label="Next screenshot">
+                →
+            </button>
 
-                    </div>
+        </div>
 
-                </div>
 
-            </section>
+        <!-- Screenshot information -->
+        <div class="gallery-info">
+
+            <p
+                class="eyebrow"
+                id="galleryLabel">
+                PROJECT SCREENSHOT
+            </p>
+
+            <h2 id="galleryTitle">
+                Project screenshots
+            </h2>
+
+            <p id="galleryDescription">
+                Explore the solution screenshots.
+            </p>
+
+        </div>
+
+
+        <!-- Thumbnails -->
+        <div
+            class="gallery-thumbnails"
+            id="galleryThumbnails">
+        </div>
+
+    </div>
+
+</div>
 
 
             <!-- =================================================
