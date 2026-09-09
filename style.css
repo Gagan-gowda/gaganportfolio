@@ -2411,6 +2411,19 @@ body.dark .solution-card.featured .solution-link {
 
 }
 
+.contact-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: inherit;
+    text-decoration: none;
+}
+
+.contact-item svg {
+    color: #0A66C2; /* LinkedIn Blue */
+}
+``
+
 /* =========================================================
    COMING SOON SOLUTION CARDS
 ========================================================= */
