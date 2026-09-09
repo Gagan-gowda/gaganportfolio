@@ -219,14 +219,11 @@ const projects = {
     "Expandable Navigation Cards",
 
 previewText:
-    "A look at the navigation experience, card configuration and SharePoint authoring interface.",
-
-previewImage:
-    "ENC1.png",
+    "Explore the navigation experience, card management and SharePoint configuration.",
 
 screenshots: [
+
     {
-        afterSection: "03",
         image: "ENC1.png",
         title: "Expandable Navigation Cards",
         description:
@@ -234,36 +231,33 @@ screenshots: [
     },
 
     {
-        afterSection: "04",
         image: "ENC2.png",
         title: "Card Management",
         description:
-            "Card management interface for creating, editing, duplicating and deleting navigation cards."
+            "Management interface for creating, editing, duplicating and deleting navigation cards."
     },
 
     {
-        afterSection: "04",
-        image: "ENC4.png",
-        title: "Edit Card Configuration",
-        description:
-            "Card configuration interface for defining the card title, description and navigation links."
-    },
-
-    {
-        afterSection: "05",
         image: "ENC3.png",
-        title: "Icon Selection & Styling",
+        title: "Icon Selection",
         description:
             "Icon selection interface with predefined icons and customizable icon colors and backgrounds."
     },
 
     {
-        afterSection: "06",
-        image: "ENC5.png",
-        title: "Expanded Navigation Experience",
+        image: "ENC4.png",
+        title: "Edit Card",
         description:
-            "Final user experience showing expandable navigation cards and their related links."
+            "Card configuration interface for defining the card title, description and navigation links."
+    },
+
+    {
+        image: "ENC5.png",
+        title: "Expanded Navigation",
+        description:
+            "Final navigation experience showing expandable cards and their related navigation links."
     }
+
 ],
 
 sections: [
@@ -866,14 +860,11 @@ sections: [
     "Expandable Menu",
 
 previewText:
-    "A look at the SharePoint web part, menu configuration and authoring experience.",
-
-previewImage:
-    "EM1.png",
+    "Explore the SharePoint web part, configuration experience and expandable menu.",
 
 screenshots: [
+
     {
-        afterSection: "03",
         image: "EM1.png",
         title: "Expandable Menu",
         description:
@@ -881,28 +872,26 @@ screenshots: [
     },
 
     {
-        afterSection: "04",
         image: "EM2.png",
-        title: "Menu Heading Settings",
+        title: "Menu Settings",
         description:
-            "Configuration experience showing the menu heading and available heading-size options."
+            "Configuration experience showing menu heading and heading-size options."
     },
 
     {
-        afterSection: "07",
         image: "EM3.png",
         title: "Expandable Menu Configuration",
         description:
-            "SharePoint property pane used to configure the menu heading, formatting and navigation links."
+            "SharePoint property pane used to configure the heading, formatting and navigation links."
     },
 
     {
-        afterSection: "01",
         image: "EM4.png",
         title: "SharePoint Web Part",
         description:
-            "Expandable Menu available as a reusable web part within the SharePoint page authoring experience."
+            "Expandable Menu available as a reusable web part within the SharePoint authoring experience."
     }
+
 ],
 
 sections: [
@@ -1660,6 +1649,24 @@ const modalPreviewTitle =
 const modalPreviewText =
     document.getElementById("modalPreviewText");
 
+const galleryMainImage =
+    document.getElementById("galleryMainImage");
+
+const galleryTitle =
+    document.getElementById("galleryTitle");
+
+const galleryDescription =
+    document.getElementById("galleryDescription");
+
+const galleryThumbnails =
+    document.getElementById("galleryThumbnails");
+
+const galleryPrev =
+    document.getElementById("galleryPrev");
+
+const galleryNext =
+    document.getElementById("galleryNext");
+
 const caseStudyContent =
     document.getElementById("caseStudyContent");
 
@@ -1669,7 +1676,219 @@ const modalPreviewImage =
 
 let lastFocusedElement = null;
 
+/* =========================================================
+   SCREENSHOT GALLERY
+========================================================= */
 
+let currentGalleryIndex = 0;
+let currentGalleryScreenshots = [];
+
+
+function renderGallery(project) {
+
+    if (
+        !project.screenshots ||
+        project.screenshots.length === 0
+    ) {
+        return;
+    }
+
+
+    currentGalleryScreenshots =
+        project.screenshots;
+
+    currentGalleryIndex = 0;
+
+
+    function showGalleryImage(index) {
+
+        if (
+            index < 0 ||
+            index >= currentGalleryScreenshots.length
+        ) {
+            return;
+        }
+
+
+        currentGalleryIndex = index;
+
+        const screenshot =
+            currentGalleryScreenshots[index];
+
+
+        /* Main image */
+
+        if (galleryMainImage) {
+
+            galleryMainImage.style.opacity = "0";
+
+
+            setTimeout(() => {
+
+                galleryMainImage.src =
+                    screenshot.image;
+
+                galleryMainImage.alt =
+                    screenshot.title;
+
+                galleryMainImage.style.opacity = "1";
+
+            }, 100);
+
+        }
+
+
+        /* Title */
+
+        if (galleryTitle) {
+
+            galleryTitle.textContent =
+                screenshot.title;
+
+        }
+
+
+        /* Description */
+
+        if (galleryDescription) {
+
+            galleryDescription.textContent =
+                screenshot.description;
+
+        }
+
+
+        /* Active thumbnail */
+
+        document
+            .querySelectorAll(".gallery-thumbnail")
+            .forEach((thumbnail, thumbnailIndex) => {
+
+                thumbnail.classList.toggle(
+                    "active",
+                    thumbnailIndex === index
+                );
+
+            });
+
+    }
+
+
+    /* ---------------------------------------------
+       BUILD THUMBNAILS
+    ---------------------------------------------- */
+
+    if (galleryThumbnails) {
+
+        galleryThumbnails.innerHTML = "";
+
+
+        currentGalleryScreenshots.forEach(
+            (screenshot, index) => {
+
+                const thumbnail =
+                    document.createElement("button");
+
+                thumbnail.type = "button";
+
+                thumbnail.className =
+                    "gallery-thumbnail";
+
+
+                thumbnail.innerHTML = `
+
+                    <img
+                        src="${screenshot.image}"
+                        alt="${screenshot.title}"
+                        loading="lazy"
+                    >
+
+                `;
+
+
+                thumbnail.addEventListener(
+                    "click",
+                    () => {
+
+                        showGalleryImage(index);
+
+                    }
+                );
+
+
+                galleryThumbnails.appendChild(
+                    thumbnail
+                );
+
+            }
+        );
+
+    }
+
+
+    /* ---------------------------------------------
+       PREVIOUS
+    ---------------------------------------------- */
+
+    if (galleryPrev) {
+
+        galleryPrev.onclick = () => {
+
+            let newIndex =
+                currentGalleryIndex - 1;
+
+
+            if (newIndex < 0) {
+
+                newIndex =
+                    currentGalleryScreenshots.length - 1;
+
+            }
+
+
+            showGalleryImage(newIndex);
+
+        };
+
+    }
+
+
+    /* ---------------------------------------------
+       NEXT
+    ---------------------------------------------- */
+
+    if (galleryNext) {
+
+        galleryNext.onclick = () => {
+
+            let newIndex =
+                currentGalleryIndex + 1;
+
+
+            if (
+                newIndex >=
+                currentGalleryScreenshots.length
+            ) {
+
+                newIndex = 0;
+
+            }
+
+
+            showGalleryImage(newIndex);
+
+        };
+
+    }
+
+
+    /* ---------------------------------------------
+       SHOW FIRST IMAGE
+    ---------------------------------------------- */
+
+    showGalleryImage(0);
+
+}
 /* =========================================================
    BUILD CASE STUDY CONTENT
 ========================================================= */
@@ -1954,6 +2173,8 @@ if (modalPreviewImage) {
                     This is the part that fixes the
                     problem you were having.
                 */
+
+                renderGallery(project);
 
                 renderCaseStudy(project);
 
